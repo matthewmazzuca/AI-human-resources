@@ -6,9 +6,10 @@ angular.module('app', ['ngMaterial', 'mwFormBuilder', 'mwFormViewer', 'mwFormUti
         });
         $translateProvider.preferredLanguage('en');
     })
-    .controller('DemoController', function($q,$http, $translate, mwFormResponseUtils) {
+    .controller('DemoController', function($q,$http, $translate, mwFormResponseUtils, $scope) {
 
         var ctrl = this;
+        $scope.timeforAI = true
         ctrl.cmergeFormWithResponse = false;
         ctrl.cgetQuestionWithResponseList = false;
         ctrl.cgetResponseSheetHeaders = false;
