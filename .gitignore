@@ -1,0 +1,12 @@
+node_modules
+typings
+*.log
+.vscode
+playground.js
+state.js
+/.DS_Store
+/CONTRIBUTING.md
+/LICENSE
+/README.md
+/src/node_modules
+/src/bower_components
