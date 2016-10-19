@@ -70,7 +70,7 @@
         <span class="label">Iterations</span>
         <span class="value" id="iter-number"></span>
       </div>
-      <div class="control ui-learningRate">
+      <div class="control ui-learningRate" ng-hide="true">
         <label for="learningRate">Learning rate</label>
         <div class="select">
           <select id="learningRate">
@@ -88,7 +88,7 @@
           </select>
         </div>
       </div>
-      <div class="control ui-activation">
+      <div class="control ui-activation" ng-hide="true">
         <label for="activations">Activation</label>
         <div class="select">
           <select id="activations">
@@ -99,7 +99,7 @@
           </select>
         </div>
       </div>
-      <div class="control ui-regularization">
+      <div class="control ui-regularization" ng-hide="true">
         <label for="regularizations">Regularization</label>
         <div class="select">
           <select id="regularizations">
@@ -109,7 +109,7 @@
           </select>
         </div>
       </div>
-      <div class="control ui-regularizationRate">
+      <div class="control ui-regularizationRate" ng-hide="true">
         <label for="regularRate">Regularization rate</label>
         <div class="select">
           <select id="regularRate">
@@ -126,7 +126,7 @@
           </select>
         </div>
       </div>
-      <div class="control ui-problem">
+      <div class="control ui-problem" ng-hide="true">
         <label for="problem">Problem type</label>
         <div class="select">
           <select id="problem">
@@ -145,7 +145,7 @@
   <div id="main-part" class="l--page" ng-hide="!timeforAI">
 
     <!--  Data Column-->
-    <div class="column data">
+    <div class="column data" ng-hide="true">
       <h4>
         <span>Data</span>
       </h4>
@@ -200,7 +200,7 @@
     <!-- Features Column -->
     <div class="column features">
       <h4>Features</h4>
-      <p>Which properties do you want to feed in?</p>
+      <!-- <p>Which properties do you want to feed in?</p> -->
       <div id="network">
         <svg id="svg" width="510" height="450">
           <defs>
@@ -215,30 +215,11 @@
           <div><span class="type">Weight/Bias</span> is <span class="value">0.2</span><span><input type="number"/></span>.</div>
         </div>
         <div class="callout thumbnail">
-          <svg viewBox="0 0 30 30">
-            <defs>
-              <marker id="arrow" markerWidth="5" markerHeight="5" refx="5" refy="2.5" orient="auto" markerUnits="userSpaceOnUse">
-                <path d="M0,0 L5,2.5 L0,5 z"/>
-              </marker>
-            </defs>
-            <path d="M12,30C5,20 2,15 12,0" marker-end="url(#arrow)">
-          </svg>
-          <div class="label">
-            This is the output from one <b>neuron</b>. Hover to see it larger.
-          </div>
+
+          
         </div>
         <div class="callout weights">
-          <svg viewBox="0 0 30 30">
-            <defs>
-              <marker id="arrow" markerWidth="5" markerHeight="5" refx="5" refy="2.5" orient="auto" markerUnits="userSpaceOnUse">
-                <path d="M0,0 L5,2.5 L0,5 z"/>
-              </marker>
-            </defs>
-            <path d="M12,30C5,20 2,15 12,0" marker-end="url(#arrow)">
-          </svg>
-          <div class="label">
-            The outputs are mixed with varying <b>weights</b>, shown by the thickness of the lines.
-          </div>
+
         </div>
       </div>
     </div>
@@ -246,14 +227,7 @@
     <!-- Hidden Layers Column -->
     <div class="column hidden-layers">
       <h4>
-        <div class="ui-numHiddenLayers">
-          <button id="add-layers" class="mdl-button mdl-js-button mdl-button--icon">
-            <i class="material-icons">add</i>
-          </button>
-          <button id="remove-layers" class="mdl-button mdl-js-button mdl-button--icon">
-            <i class="material-icons">remove</i>
-          </button>
-        </div>
+
         <span id="num-layers"></span>
         <span id="layers-label"></span>
       </h4>
@@ -262,7 +236,7 @@
 
     <!-- Output Column -->
     <div class="column output">
-      <h4>Output</h4>
+      <h4>Showing Output for Variable: Facebook Friends</h4>
       <div class="metrics">
         <div class="output-stats ui-percTrainData">
           <span>Test loss</span>
@@ -296,73 +270,22 @@
           </svg>
         </div>
         <br/>
-        <div style="display:flex;">
-          <label class="ui-showTestData mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="show-test-data">
-            <input type="checkbox" id="show-test-data" class="mdl-checkbox__input" checked>
-            <span class="mdl-checkbox__label label">Show test data</span>
-          </label>
-          <label class="ui-discretize mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="discretize">
-            <input type="checkbox" id="discretize" class="mdl-checkbox__input" checked>
-            <span class="mdl-checkbox__label label">Discretize output</span>
-          </label>
-        </div>
+
       </div>
     </div>
 
   </div>
 
-<md-content ng-if="ctrl.formData && !timeforAI" >
-    <md-tabs md-dynamic-height md-border-bottom md-selected="ctrl.selectedTabIndex">
-        <md-tab label="Builder">
-            <md-content class="md-padding tab-content">
-                <div layout="row" layout-align="center" ctrl.selectedTabIndex===0>
+<md-content ng-if="ctrl.formData && !timeforAI && !processing" >
+    <md-content class="md-padding tab-content" >
+                <div layout="row" layout-align="center" >
                     <div flex-gt-sm="66" flex-sm="90" >
-                        <div layout="row" layout-align="center">
-                            <div>
-                                <md-button class="md-primary" aria-label="Reset" ng-click="ctrl.resetBuilder()">
-                                    Reset
-                                </md-button>
-                                <md-checkbox ng-model="ctrl.builderReadOnly" aria-label="Read only">
-                                    Read only
-                                </md-checkbox>
-                            </div>
-                        </div>
 
-                        <mw-form-builder api="ctrl.formBuilder" options="ctrl.optionsBuilder" form-data="ctrl.formData" form-status="ctrl.formStatus" read-only="ctrl.builderReadOnly"
-                        on-image-selection="ctrl.onImageSelection()"></mw-form-builder>
-                    </div>
-
-
-                </div>
-
-
-            </md-content>
-        </md-tab>
-        <md-tab label="viewer" md-on-select="ctrl.resetViewer()">
-            <md-content class="md-padding tab-content" >
-                <div layout="row" layout-align="center" ng-if="ctrl.selectedTabIndex===1">
-                    <div flex-gt-sm="66" flex-sm="90" >
-                        <div layout="row" layout-align="center">
-                            <div>
-                                <md-button class="md-primary" aria-label="Reset" ng-click="ctrl.resetViewer()">
-                                    Reset
-                                </md-button>
-                                <md-checkbox ng-model="ctrl.formOptions.autoStart" aria-label="Autostart">
-                                    Autostart
-                                </md-checkbox>
-                                <md-checkbox ng-model="ctrl.viewerReadOnly" aria-label="Read only">
-                                    Read only
-                                </md-checkbox>
-                            </div>
-                        </div>
-
-                        <mw-form-viewer form-data="ctrl.formData" template-data="ctrl.templateData"  form-status="ctrl.formStatus" options="ctrl.formOptions" api="ctrl.formViewer" response-data="ctrl.responseData" read-only="ctrl.viewerReadOnly" on-submit="ctrl.saveResponse()"></mw-form-viewer>
+                        <mw-form-viewer submitted="submitted" form-data="ctrl.formData" template-data="ctrl.templateData"  form-status="ctrl.formStatus" options="ctrl.formOptions" api="ctrl.formViewer" response-data="ctrl.responseData" read-only="ctrl.viewerReadOnly" on-submit="ctrl.saveResponse()"></mw-form-viewer>
                         <br/>
                         <hr/>
                         <br/>
-                        <md-checkbox ng-model="ctrl.showResponseData" aria-label="Show response data">
-                            Show response data
-                        </md-checkbox>
+
                         <md-card ng-if="ctrl.showResponseData" class="md-padding">
                             <pre >
                                 {{ctrl.responseData|json}}
@@ -373,93 +296,35 @@
                 </div>
 
             </md-content>
-        </md-tab>
-        <md-tab label="model" ng-if="false">
-            <md-content class="md-padding tab-content">
-                <md-card class="md-padding">
-                    <pre>
-                        {{ctrl.formData|json}}
-                    </pre>
-                </md-card>
-                <md-checkbox ng-model="ctrl.showModelJsonInput" aria-label="Set model value">
-                    Set model value
-                </md-checkbox>
 
-                <md-card class="md-padding" ng-if="ctrl.showModelJsonInput">
-                    <md-input-container class="md-block">
-                        <textarea   ng-model="ctrl.modelJsonInput"></textarea>
-                    </md-input-container>
-                    <div>
-                        <md-button class="md-raised"  ng-click="ctrl.setModelFromJsonInput()">Set</md-button>
-                    </div>
-
-                </md-card>
-            </md-content>
-        </md-tab>
-        <md-tab label="utils" ng-if="false">
-            <md-content class="md-padding tab-content" ctrl.selectedTabIndex===3>
-                <md-card class="md-padding">
-                    <h3>mwFormResponseUtils service</h3>
-                    <br />
-                    <h4><a ng-click="ctrl.cmergeFormWithResponse = !ctrl.cmergeFormWithResponse"  href="#mergeFormWithResponse" aria-expanded="false" aria-controls="collapseExample"> mergeFormWithResponse(formData, responseData)</a></h4>
-                    <div ng-if="ctrl.cmergeFormWithResponse" id="mergeFormWithResponse">
-                        <md-card class="md-padding">
-                            <pre>
-                                {{ctrl.getMerged() | json}}
-                            </pre>
-                        </md-card>
-                    </div>
-
-                    <h4><a ng-click="ctrl.cgetQuestionWithResponseList = !ctrl.cgetQuestionWithResponseList" href="#getQuestionWithResponseList" aria-expanded="false" aria-controls="collapseExample"> getQuestionWithResponseList(formData, responseData)</a></h4>
-                    <div ng-if="ctrl.cgetQuestionWithResponseList" id="getQuestionWithResponseList">
-                        <md-card class="md-padding">
-                            <pre>
-                                {{ctrl.getQuestionWithResponseList() | json}}
-                            </pre>
-                        </md-card>
-                    </div>
-
-                    <h4><a ng-click="ctrl.cgetResponseSheetHeaders = !ctrl.cgetResponseSheetHeaders"  href="#getResponseSheetHeaders" aria-expanded="false" aria-controls="collapseExample"> getResponseSheetHeaders(formData, withQuestionNumbers)</a></h4>
-                    <div ng-if="ctrl.cgetResponseSheetHeaders" id="getResponseSheetHeaders">
-                        <md-card class="md-padding">
-                            <md-checkbox ng-model="ctrl.headersWithQuestionNumber" aria-label="headersWithQuestionNumber">
-                                headersWithQuestionNumber
-                            </md-checkbox>
-                            <pre>
-                                {{ctrl.getResponseSheetHeaders() | json}}
-                            </pre>
-                        </md-card>
-                    </div>
-
-                    <h4><a ng-click="ctrl.cgetResponseSheetRow = !ctrl.cgetResponseSheetRow" href="#getResponseSheetRow" aria-expanded="false" aria-controls="collapseExample"> getResponseSheetRow(formData, responseData)</a></h4>
-                    <div  ng-if="ctrl.cgetResponseSheetRow" class="collapse" id="getResponseSheetRow">
-                        <md-card class="md-padding">
-                            <pre>
-                                {{ctrl.getResponseSheetRow() | json}}
-                            </pre>
-                        </md-card>
-                    </div>
-
-                    <h4><a ng-click="ctrl.cgetResponseSheet = !ctrl.cgetResponseSheet" href="#getResponseSheet" aria-expanded="false" aria-controls="collapseExample"> getResponseSheet(formData, responseDataObjectOrList, headersWithQuestionNumber)</a></h4>
-                    <div ng-if="ctrl.cgetResponseSheet" id="getResponseSheet">
-                        <md-card class="md-padding">
-                            <md-checkbox ng-model="ctrl.headersWithQuestionNumber" aria-label="headersWithQuestionNumber">
-                                headersWithQuestionNumber
-                            </md-checkbox>
-
-                            <pre>
-                                {{ctrl.getResponseSheet() | json}}
-                            </pre>
-                        </md-card>
-                    </div>
-                </md-card>
-            </md-content>
-        </md-tab>
-    </md-tabs>
 </md-content>
 
+<!-- <md-progress-circular ng-disabled="!vm.activated" md-diameter="96"></md-progress-circular> -->
+<div layout="column" layout-align="center center" style="height: 100%;" ng-if="!timeforAI && processing">
 
 
+    <div layout="column" layout-align="center center" style="height: 100%; width:100%;">
+
+        <div flex layout="row"  layout-xs="column" layout-align="center center" style="width:100%">
+            <button  ng-if="vm.showButtons && !vm.showResponseData" type="button" style="margin:40px;" ng-click="vm.previousQuestion()" class="btn btn-primary btn-circle btn-xl"><i class="glyphicon glyphicon-chevron-left"></i></button>
+            <br>
+            <!-- <new-launch-form-viewer form-data="vm.formData" template-data="vm.templateData"  form-status="vm.formStatus" options="vm.formOptions" api="vm.formViewer" response-data="vm.responseData" read-only="vm.viewerReadOnly" on-submit="vm.saveResponse()"></new-launch-form-viewer> -->
+            
+            <md-card flex-gt-sm="70" layout-align="center center" style="min-height: 60%;">
+                <h1> Please wait while we gather data from current bank employees</h1>
+                <md-progress-circular md-diameter="96"></md-progress-circular>
+
+                
+            </md-card>
+            <br>
+            <button ng-if="vm.showButtons && !vm.showResponseData" type="button" style="margin:40px;" ng-click="vm.nextQuestion()" class="btn btn-primary btn-circle btn-xl"><i class="glyphicon glyphicon-chevron-right"></i></button>
+        </div>
+
+    </div>
+ </div>
+
+
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-aria/angular-aria.js"></script>
 <script src="bower_components/angular-animate/angular-animate.js"></script>

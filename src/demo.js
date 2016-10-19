@@ -6,10 +6,12 @@ angular.module('app', ['ngMaterial', 'mwFormBuilder', 'mwFormViewer', 'mwFormUti
         });
         $translateProvider.preferredLanguage('en');
     })
-    .controller('DemoController', function($q,$http, $translate, mwFormResponseUtils, $scope) {
+    .controller('DemoController', function($q,$http, $translate, mwFormResponseUtils, $scope, $timeout) {
 
         var ctrl = this;
-        $scope.timeforAI = true
+        $scope.timeforAI = false
+        $scope.processing = false
+        $scope.submitted = "Hello world"
         ctrl.cmergeFormWithResponse = false;
         ctrl.cgetQuestionWithResponseList = false;
         ctrl.cgetResponseSheetHeaders = false;
@@ -51,15 +53,23 @@ angular.module('app', ['ngMaterial', 'mwFormBuilder', 'mwFormViewer', 'mwFormUti
             });
 
         ctrl.showResponseRata=false;
+
         ctrl.saveResponse = function(){
-            var d = $q.defer();
-            var res = confirm("Response save success?");
-            if(res){
-                d.resolve(true);
-            }else{
-                d.reject();
-            }
-            return d.promise;
+            console.log("Hello World")
+            $scope.timeforAI = false
+            $scope.processing = true
+            $timeout( function(){ 
+                $scope.timeforAI = true
+                $scope.processing = false
+                angular.element("#play-pause-button").trigger( "click" );
+                $timeout( function(){ 
+                    $scope.timeforAI = false
+                    $scope.processing = true
+                    // angular.element("#play-pause-button"    ).trigger( "click" );
+                 }, 20000);
+
+             }, 5000);
+            
         };
 
         ctrl.onImageSelection = function (){

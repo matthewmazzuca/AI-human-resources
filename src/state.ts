@@ -48,6 +48,16 @@ export let regDatasets: {[key: string]: dataset.DataGenerator} = {
   "reg-gauss": dataset.regressGaussian
 };
 
+export function randomSet(obj:any) {
+  var temp = [];
+  for (var key in obj) {
+    temp.push(key);
+  }
+  var item = temp[Math.floor(Math.random()*temp.length)];
+
+  return item;
+}
+
 export function getKeyFromValue(obj: any, value: any): string {
   for (let key in obj) {
     if (obj[key] === value) {
@@ -137,20 +147,20 @@ export class State {
   learningRate = 0.03;
   regularizationRate = 0;
   showTestData = false;
-  noise = 0;
-  batchSize = 10;
+  noise = 50;
+  batchSize = 18;
   discretize = false;
   tutorial: string = null;
   percTrainData = 50;
-  activation = nn.Activations.TANH;
-  regularization: nn.RegularizationFunction = null;
+  activation = nn.Activations.RELU;
+  regularization: nn.RegularizationFunction = nn.RegularizationFunction.L2;
   problem = Problem.CLASSIFICATION;
   initZero = false;
   hideText = false;
   collectStats = false;
-  numHiddenLayers = 1;
+  numHiddenLayers = 6;
   hiddenLayerControls: any[] = [];
-  networkShape: number[] = [4, 2];
+  networkShape: number[] = [6, 6,6,6,6,6];
   x = true;
   y = true;
   xTimesY = false;
@@ -160,7 +170,7 @@ export class State {
   sinX = false;
   cosY = false;
   sinY = false;
-  dataset: dataset.DataGenerator = dataset.classifyCircleData;
+  dataset: dataset.DataGenerator = dataset.classifyXORData;
   regDataset: dataset.DataGenerator = dataset.regressPlane;
   seed: string;
 

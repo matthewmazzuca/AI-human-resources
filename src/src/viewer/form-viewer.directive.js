@@ -12,7 +12,8 @@ angular.module('mwFormViewer').directive('mwFormViewer', function () {
             options: '=?',
             formStatus: '=?', //wrapper for internal angular form object
             onSubmit: '&',
-            api: '=?'
+            api: '=?',
+            submitted: '='
 
         },
         templateUrl: 'mw-form-viewer.html',
@@ -66,6 +67,7 @@ angular.module('mwFormViewer').directive('mwFormViewer', function () {
                 }).catch(function(){
                     ctrl.submitStatus='ERROR';
                 });
+                console.log(ctrl.submitted)
 
 
             };
