@@ -54,17 +54,18 @@
   <!-- Top Controls -->
   <div id="top-controls" ng-hide="!timeforAI">
     <div class="container l--page">
-      <div class="timeline-controls">
+      <div class="timeline-controls" style="display:none;">
         <button class="mdl-button mdl-js-button mdl-button--icon ui-resetButton" id="reset-button" title="Reset the network">
-          <i class="material-icons">replay</i>
+          <i class="material-icons" style="display:none;">replay</i>
         </button>
-        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored ui-playButton" id="play-pause-button" title="Run/Pause">
+        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored ui-playButton" id="play-pause-button" title="Run/Pause" style="display:none;">
           <i class="material-icons">play_arrow</i>
           <i class="material-icons">pause</i>
         </button>
         <button class="mdl-button mdl-js-button mdl-button--icon ui-stepButton" id="next-step-button" title="Step">
-          <i class="material-icons">skip_next</i>
+          <i class="material-icons" style="display:none;">skip_next</i>
         </button>
+        <!-- <h1> Please wait while we train the neural network</h1> -->
       </div>
       <div class="control">
         <span class="label">Iterations</span>
@@ -276,7 +277,7 @@
 
   </div>
 
-<md-content ng-if="ctrl.formData && !timeforAI && !processing" >
+<md-content ng-if="ctrl.formData && !timeforAI && !processing && !finalPage" >
     <md-content class="md-padding tab-content" >
                 <div layout="row" layout-align="center" >
                     <div flex-gt-sm="66" flex-sm="90" >
@@ -311,7 +312,7 @@
             <!-- <new-launch-form-viewer form-data="vm.formData" template-data="vm.templateData"  form-status="vm.formStatus" options="vm.formOptions" api="vm.formViewer" response-data="vm.responseData" read-only="vm.viewerReadOnly" on-submit="vm.saveResponse()"></new-launch-form-viewer> -->
             
             <md-card flex-gt-sm="70" layout-align="center center" style="min-height: 60%;">
-                <h1> Please wait while we gather data from current bank employees</h1>
+                <h1> {{ctrl.textProgress}}</h1>
                 <md-progress-circular md-diameter="96"></md-progress-circular>
 
                 
@@ -323,7 +324,26 @@
     </div>
  </div>
 
-
+<div class='md-padding' layout="row" layout-align="center center" ng-if="finalPage">
+  <md-card flex-xs flex-gt-xs="30" ng-repeat="surv in ctrl.usersFinal" ng-if="true" md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch
+  class="md-ink-ripples">
+     <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{surv.name}}</span>
+            <span class="md-subhead">Age: {{surv.age}}</span>
+            <span class="md-subhead">Email: {{surv.email}}</span> 
+            <span class="md-subhead">Looking for Job: Yes</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-lg card-media"></div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Email</md-button>
+          <md-button>Copy info to Clipboard</md-button>
+        </md-card-actions>
+  </md-card>
+</div>
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-aria/angular-aria.js"></script>
